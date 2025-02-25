@@ -32,3 +32,5 @@ jobs:
         run: |
           echo "Depot Build ID: ${{ steps.build.outputs.digest }}"
           echo "Image ID: ${{ steps.build.outputs.image-id }}"
+
+
