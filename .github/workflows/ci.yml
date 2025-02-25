@@ -16,3 +16,7 @@ jobs:
       with:
         push: false  # Set to true if you want to push to a registry
         tags: user/app:latest
+
+permissions:
+  contents: read
+  id-token: write
