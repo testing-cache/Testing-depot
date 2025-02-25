@@ -6,26 +6,29 @@ on:
   pull_request:
     branches: [ master ]
 
-permissions:
-  contents: read
-  id-token: write
-
 jobs:
   build:
-    runs-on: depot-ubuntu-latest
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+      packages: write
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
-
-    - name: Build and push Docker image
-      uses: depot/build-push-action@v1
-      with:
-        project: your-depot-project-id  # Replace with your Depot project ID
-        context: .
-        push: false  # Set to true if you want to push to a registry
-        tags: user/app:latest
-
-    - name: Display Depot build information
-      run: |
-        echo "Depot Build ID: ${{ steps.build.outputs.digest }}"
-        echo "Image ID: ${{ steps.build.outputs.image-id }}"
+      - name: Checkout code
+        uses: actions/checkout@v3
+      
+      - name: Set up Depot CLI
+        uses: depot/setup-action@v1
+      
+      - name: Build and push Docker image
+        uses: depot/build-push-action@v1
+        with:
+          project: 6m1991svt1
+          context: .
+          push: false  # Set to true if you want to push to a registry
+          tags: user/app:latest
+      
+      - name: Display Depot build information
+        run: |
+          echo "Depot Build ID: ${{ steps.build.outputs.digest }}"
+          echo "Image ID: ${{ steps.build.outputs.image-id }}"
